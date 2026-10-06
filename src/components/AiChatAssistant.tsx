@@ -47,14 +47,14 @@ export const AiChatAssistant: React.FC<AiChatAssistantProps> = ({ context }) => 
     {
       id: 'init-1',
       sender: 'ai',
-      text: `สวัสดีครับ! ผมคือ **DormAI** ผู้ช่วยอัจฉริยะประจำหอพัก ${context.settings.name} 🏢✨
+      text: `สวัสดีจ้า! หนูคือ **น้องซันนี่ (Sunny)** ผู้ช่วยสุดน่ารักประจำหอพัก ${context.settings.name} 🌻✨
 
-ผมสามารถช่วยคุณ:
-• 📊 **ช่วยคิด & วิเคราะห์ข้อมูลหอพัก:** สรุปยอดค้างชำระ, อัตราเข้าพัก, ห้องที่ใช้ไฟสูงผิดปกติ
-• 📝 **ช่วยร่างประกาศและข้อความ:** ร่างประกาศงดส่งเสียงดัง, ร่างข้อความทวงค่าเช่าอย่างสุภาพ
+หนูพร้อมช่วยพี่ๆ ทุกคนเลยนะ:
+• 📊 **ช่วยคิด & วิเคราะห์ข้อมูลหอพัก:** สรุปยอดค้างชำระ, อัตราเข้าพัก, ตรวจสอบมิเตอร์น้ำไฟ
+• 📝 **ช่วยร่างประกาศและข้อความ:** ร่างประกาศงดส่งเสียงดัง, ร่างข้อความทวงค่าเช่าแบบสุภาพ
 • 💡 **ตอบคำถามทั่วไป:** อัตราค่าน้ำ-ไฟ (฿${context.settings.defaultElectricRate}/หน่วย), เงื่อนไขเงินประกัน, ขั้นตอนแจ้งซ่อม
 
-ลองคลิกที่หัวข้อแนะนำด้านล่าง หรือพิมพ์คำถามที่ต้องการได้เลยครับ!`,
+คลิกหัวข้อแนะนำด้านล่าง หรือพิมพ์คุยกับน้องซันนี่ได้เลยน้า ♡`,
       timestamp: new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }),
       thoughtProcess: [
         'โหลดบริบทสถานะหอพักแบบ Real-time',
@@ -157,25 +157,29 @@ export const AiChatAssistant: React.FC<AiChatAssistantProps> = ({ context }) => 
 
   return (
     <>
-      {/* Floating Action Button (FAB) */}
+      {/* Floating Action Button (FAB) with Mascot */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-40 flex items-center space-x-2.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 text-white px-4 py-3 rounded-full shadow-2xl hover:shadow-indigo-500/50 hover:scale-105 active:scale-95 transition-all duration-300 group border-2 border-white/40"
+          className="fixed bottom-6 right-6 z-40 flex items-center space-x-2.5 bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 text-amber-950 p-2 pr-4 rounded-full shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-105 active:scale-95 transition-all duration-300 group border-2 border-white/90 animate-mascot-float"
         >
-          <div className="relative">
-            <Bot className="w-6 h-6 animate-pulse" />
-            <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+          <div className="relative w-11 h-11 rounded-full overflow-hidden bg-white shadow-xs p-0.5 border border-amber-300 shrink-0">
+            <img 
+              src="/mascot/chat.png" 
+              alt="น้องซันนี่" 
+              className="w-full h-full object-cover rounded-full"
+            />
+            <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
             </span>
           </div>
           <div className="text-left hidden sm:block">
-            <div className="text-xs font-bold leading-none flex items-center space-x-1">
-              <span>DormAI</span>
-              <span className="text-[10px] bg-white/20 px-1 rounded font-normal">Co-Pilot</span>
+            <div className="text-xs font-black leading-none flex items-center space-x-1 text-amber-950">
+              <span>น้องซันนี่ AI</span>
+              <span className="text-[10px] bg-white/70 px-1 rounded font-bold">🌻 ผู้ช่วย</span>
             </div>
-            <div className="text-[10px] text-white/80 leading-tight">ถาม-ตอบ & ช่วยคิด</div>
+            <div className="text-[10px] text-amber-900 font-medium leading-tight mt-0.5">แวะมาคุยกันได้นะ ♡</div>
           </div>
         </button>
       )}
@@ -183,28 +187,31 @@ export const AiChatAssistant: React.FC<AiChatAssistantProps> = ({ context }) => 
       {/* Chat Window */}
       {isOpen && (
         <div 
-          className={`fixed z-50 bg-white shadow-2xl border border-slate-200 transition-all duration-300 flex flex-col ${
+          className={`fixed z-50 bg-white shadow-2xl border border-amber-100 transition-all duration-300 flex flex-col ${
             isExpanded 
               ? 'inset-4 sm:inset-10 rounded-2xl' 
-              : 'bottom-4 right-4 sm:bottom-6 sm:right-6 w-[95vw] sm:w-[420px] h-[620px] max-h-[85vh] rounded-2xl'
+              : 'bottom-4 right-4 sm:bottom-6 sm:right-6 w-[95vw] sm:w-[420px] h-[620px] max-h-[85vh] rounded-3xl'
           }`}
         >
           {/* Header */}
-          <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-900 text-white p-3.5 sm:p-4 rounded-t-2xl flex items-center justify-between shadow-md shrink-0">
+          <div className="bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 text-amber-950 p-3.5 sm:p-4 rounded-t-3xl flex items-center justify-between shadow-xs shrink-0 border-b border-amber-300/40">
             <div className="flex items-center space-x-3">
-              <div className="relative w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-500 to-indigo-500 flex items-center justify-center shadow-inner">
-                <Bot className="w-5 h-5 text-white" />
-                <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 border-2 border-slate-900 rounded-full"></span>
+              <div className="relative w-10 h-10 rounded-full bg-white p-0.5 shadow-sm border border-amber-300 overflow-hidden shrink-0">
+                <img 
+                  src="/mascot/hello.png" 
+                  alt="น้องซันนี่" 
+                  className="w-full h-full object-cover rounded-full"
+                />
+                <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full"></span>
               </div>
               <div>
                 <div className="flex items-center space-x-2">
-                  <h3 className="font-bold text-sm tracking-tight">DormAI ผู้ช่วยอัจฉริยะ</h3>
-                  <span className="text-[10px] bg-indigo-500/30 text-indigo-200 border border-indigo-400/30 px-1.5 py-0.5 rounded-full flex items-center space-x-1">
-                    <Sparkles className="w-2.5 h-2.5" />
-                    <span>Real-time Context</span>
+                  <h3 className="font-black text-sm tracking-tight text-amber-950">น้องซันนี่ AI ผู้ช่วยหอพัก</h3>
+                  <span className="text-[10px] bg-white/70 text-amber-900 border border-amber-300/50 px-1.5 py-0.5 rounded-full font-bold flex items-center space-x-1">
+                    <span>🌻 ออนไลน์</span>
                   </span>
                 </div>
-                <p className="text-[11px] text-slate-300 flex items-center space-x-1">
+                <p className="text-[11px] text-amber-900/80 flex items-center space-x-1">
                   <span>หอพัก {context.settings.name}</span>
                   <span>•</span>
                   <span>{context.role === 'admin' ? 'โหมดผู้ดูแล' : 'โหมดผู้เช่า'}</span>
@@ -322,7 +329,7 @@ export const AiChatAssistant: React.FC<AiChatAssistantProps> = ({ context }) => 
                         <UserCircle className="w-4 h-4" />
                       )
                     ) : (
-                      <Bot className="w-4 h-4" />
+                      <img src="/mascot/hello.png" alt="Sunny" className="w-7 h-7 rounded-full object-cover border border-amber-300 bg-amber-50 shadow-xs" />
                     )}
                   </div>
 
@@ -431,15 +438,14 @@ export const AiChatAssistant: React.FC<AiChatAssistantProps> = ({ context }) => 
               </div>
             ))}
 
-            {/* Loading Indicator */}
+            {/* Loading Indicator with Laptop Mascot */}
             {isLoading && (
-              <div className="flex items-start space-x-2">
-                <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 text-white flex items-center justify-center shrink-0">
-                  <Bot className="w-4 h-4 animate-spin" />
+              <div className="flex items-start space-x-2.5">
+                <div className="w-8 h-8 rounded-full bg-amber-100 p-0.5 border border-amber-300 flex items-center justify-center shrink-0 overflow-hidden shadow-xs">
+                  <img src="/mascot/laptop.png" alt="Working" className="w-full h-full object-cover animate-pulse" />
                 </div>
-                <div className="bg-white border border-slate-200 rounded-2xl rounded-tl-none p-3 shadow-sm text-xs text-slate-500 flex items-center space-x-2">
-                  <BrainCircuit className="w-4 h-4 text-indigo-600 animate-pulse" />
-                  <span className="animate-pulse">DormAI กำลังวิเคราะห์ข้อมูลและคิดคำตอบ...</span>
+                <div className="bg-amber-50/90 border border-amber-200/80 rounded-2xl rounded-tl-none p-3 shadow-xs text-xs text-amber-900 flex items-center space-x-2">
+                  <span className="animate-pulse">🌻 น้องซันนี่กำลังค้นหาข้อมูลและคิดคำตอบให้อยู่นะจ๊ะ~ ♡</span>
                 </div>
               </div>
             )}

@@ -51,30 +51,46 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   return (
     <div className="space-y-6">
       
-      {/* Welcome Banner */}
-      <div className="bg-gradient-to-r from-blue-700 via-indigo-700 to-blue-900 rounded-2xl p-6 text-white shadow-lg shadow-blue-900/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center space-x-2">
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight">ภาพรวมการบริหารหอพัก (Dashboard)</h1>
-            <span className="bg-white/20 text-white text-[11px] px-2.5 py-0.5 rounded-full font-medium">
-              รอบบิล: ก.ย. 2026
-            </span>
+      {/* Pastel Sunflower Welcome Banner */}
+      <div className="bg-gradient-to-r from-amber-100 via-yellow-100 to-orange-100 dark:from-slate-800 dark:via-slate-850 dark:to-slate-900 rounded-3xl p-6 text-amber-950 dark:text-amber-100 shadow-sm border border-amber-200/70 dark:border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-6 transition-all">
+        <div className="flex items-center space-x-4 sm:space-x-5">
+          <div className="relative shrink-0">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-white/90 p-1 shadow-sm border-2 border-amber-300 overflow-hidden animate-mascot-float">
+              <img 
+                src="/mascot/hello.png" 
+                alt="Sunflower Mascot" 
+                className="w-full h-full object-cover rounded-xl"
+              />
+            </div>
+            <span className="absolute -bottom-1 -right-1 text-base">🌻</span>
           </div>
-          <p className="text-blue-100 text-xs sm:text-sm mt-1">
-            ยินดีต้อนรับ ผู้จัดการหอพัก • ระบบพร้อมรองรับการออกบิล บันทึกมิเตอร์ และตรวจสอบสลิป
-          </p>
+          <div>
+            <div className="flex items-center space-x-2">
+              <h1 className="text-xl sm:text-2xl font-black tracking-tight text-amber-950 dark:text-white">
+                ยินดีต้อนรับสู่หอพักบ้านทานตะวัน 🌻
+              </h1>
+              <span className="bg-amber-300/80 text-amber-950 text-[11px] px-2.5 py-0.5 rounded-full font-bold shadow-xs">
+                รอบบิล: ก.ย. 2026
+              </span>
+            </div>
+            <p className="text-amber-900/80 dark:text-slate-300 text-xs sm:text-sm mt-1 leading-relaxed">
+              สวัสดีครับผู้จัดการหอพัก! วันนี้มีผู้เช่าพักอาศัยอยู่ <strong>{occupiedRooms} ห้อง</strong> • ระบบพร้อมดูแลผู้เช่าทุกคนด้วยความอบอุ่นสดใส ♡
+            </p>
+          </div>
         </div>
 
         {pendingPayments.length > 0 && (
-          <div className="flex items-center bg-amber-500/20 border border-amber-300/40 text-amber-100 px-4 py-2.5 rounded-xl text-xs backdrop-blur-md">
-            <AlertCircle className="w-4 h-4 text-amber-300 mr-2 shrink-0 animate-pulse" />
-            <span>มีสลิปโอนเงินรอตรวจสอบ <strong>{pendingPayments.length} รายการ</strong></span>
-            <button
-              onClick={() => onNavigateTab('slips')}
-              className="ml-3 underline font-bold hover:text-white"
-            >
-              ตรวจเลย
-            </button>
+          <div className="flex items-center bg-white/90 dark:bg-slate-800/90 border border-amber-300 text-amber-900 dark:text-amber-200 px-4 py-3 rounded-2xl text-xs shadow-xs shrink-0">
+            <img src="/mascot/thumbsup.png" alt="Thumbs up" className="w-9 h-9 object-cover rounded-full mr-2.5 shrink-0" />
+            <div>
+              <span>มีสลิปโอนเงินรอตรวจสอบ <strong>{pendingPayments.length} รายการ</strong></span>
+              <button
+                onClick={() => onNavigateTab('slips')}
+                className="block text-amber-700 dark:text-amber-400 underline font-bold mt-0.5 hover:text-amber-900"
+              >
+                กดตรวจเลยจ้า →
+              </button>
+            </div>
           </div>
         )}
       </div>

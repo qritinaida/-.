@@ -4,11 +4,11 @@
 
 @layer base {
   body {
-    @apply antialiased bg-slate-50 text-slate-800 transition-colors duration-200;
+    @apply antialiased bg-[#FAF8F5] text-slate-800 transition-colors duration-200 selection:bg-amber-200 selection:text-amber-900;
   }
 
   .dark body {
-    @apply bg-slate-950 text-slate-100;
+    @apply bg-slate-950 text-slate-100 selection:bg-amber-500 selection:text-slate-950;
   }
 
   /* Universal Seamless Dark Mode Styles */
@@ -17,12 +17,15 @@
     color: #f8fafc;
   }
 
-  .dark .bg-slate-50 {
+  .dark .bg-slate-50,
+  .dark .bg-\[\#FAF8F5\] {
     background-color: #020617 !important; /* slate-950 */
   }
 
   .dark .border-slate-200,
   .dark .border-slate-100,
+  .dark .border-amber-100,
+  .dark .border-amber-200,
   .dark .border-slate-200\/80,
   .dark .border-slate-200\/90 {
     border-color: #1e293b !important; /* slate-800 */
@@ -60,21 +63,32 @@
   height: 6px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #fdfaf5;
 }
 .dark .custom-scrollbar::-webkit-scrollbar-track {
   background: #0f172a;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #fcd34d;
   border-radius: 9999px;
 }
 .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #475569;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #fbbf24;
 }
 .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #64748b;
+}
+
+/* Cute floating animation for mascot */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(1deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.animate-mascot-float {
+  animation: float 3s ease-in-out infinite;
 }

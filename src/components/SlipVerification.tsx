@@ -158,8 +158,16 @@ export const SlipVerification: React.FC<SlipVerificationProps> = ({
 
       {/* Verification Cards Grid */}
       {displayedPayments.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center text-slate-400 text-xs shadow-sm">
-          {activeTab === 'pending' ? 'ไม่มีสลิปที่รอการตรวจสอบ ทุกยอดชำระได้รับการตรวจสอบเรียบร้อยแล้ว' : 'ยังไม่มีประวัติการตรวจสอบสลิป'}
+        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-amber-200/80 p-10 text-center text-xs shadow-sm flex flex-col items-center justify-center space-y-3">
+          <div className="w-24 h-24 rounded-2xl bg-amber-50 p-1 border border-amber-300 shadow-xs overflow-hidden animate-mascot-float">
+            <img src="/mascot/thanks.png" alt="Thank you" className="w-full h-full object-cover rounded-xl" />
+          </div>
+          <span className="font-bold text-sm text-slate-800 dark:text-slate-100">
+            {activeTab === 'pending' ? 'เรียบร้อยแล้วจ้า! ไม่มีสลิปค้างรอตรวจ 🌻' : 'ยังไม่มีประวัติการตรวจสอบสลิป'}
+          </span>
+          <p className="text-slate-500 max-w-sm">
+            {activeTab === 'pending' ? 'ยอดชำระได้รับการตรวจสอบและออกใบเสร็จรับเงินเรียบร้อยแล้ว ขอบคุณที่ดูแลอย่างดีนะ ♡' : 'เมื่อมีการอนุมัติหรือปฏิเสธสลิป ข้อมูลจะมาปรากฏที่นี่จ้า'}
+          </p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -37,19 +37,26 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           
-          {/* Logo & Brand */}
+          {/* Logo & Brand with Sunflower Mascot */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-violet-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
-              <Building2 className="w-6 h-6" />
+            <div className="relative group cursor-pointer">
+              <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-amber-300 via-yellow-400 to-orange-400 p-0.5 shadow-md shadow-amber-500/20 flex items-center justify-center overflow-hidden transition-transform group-hover:scale-105 active:scale-95">
+                <img 
+                  src="/mascot/hello.png" 
+                  alt="Sunflower Mascot" 
+                  className="w-full h-full object-cover rounded-2xl bg-amber-50"
+                />
+              </div>
+              <span className="absolute -bottom-1 -right-1 text-[11px] animate-bounce">🌻</span>
             </div>
             <div>
               <div className="flex items-center space-x-2">
                 <span className="font-bold text-lg text-slate-900 dark:text-white tracking-tight">DormitoryOS</span>
-                <span className="bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm flex items-center space-x-1">
-                  <span>DormAI 2.0</span>
+                <span className="bg-gradient-to-r from-amber-300 via-yellow-300 to-orange-300 text-amber-950 text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-xs border border-amber-400/40 flex items-center space-x-1">
+                  <span>🌻 ซันนี่ทานตะวัน</span>
                 </span>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">ระบบจัดการหอพักและผู้เช่าอัจฉริยะ</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">หอพักอบอุ่น สดใส อยู่สบายทุกวัน</p>
             </div>
           </div>
 

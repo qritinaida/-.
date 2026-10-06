@@ -211,24 +211,26 @@ export const GoogleAuthModal: React.FC<GoogleAuthModalProps> = ({
           {/* Top Logo & Brand */}
           <div className="flex flex-col items-center justify-center text-center space-y-3 pt-2">
             
-            {/* ACME Gradient Logo Icon */}
+            {/* Sunflower Mascot with Warm Brand */}
             <div className="flex items-center justify-center space-x-2.5">
-              <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-violet-600 via-purple-600 to-indigo-400 p-0.5 shadow-md shadow-violet-500/20 flex items-center justify-center">
-                <div className="w-full h-full rounded-full bg-gradient-to-tr from-violet-600 to-indigo-500 flex items-center justify-center relative overflow-hidden">
-                  {/* Geometric 4-point star / sparkle shape matching image */}
-                  <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C12.5 7.5 16.5 11.5 22 12C16.5 12.5 12.5 16.5 12 22C11.5 16.5 7.5 12.5 2 12C7.5 11.5 11.5 7.5 12 2Z" />
-                  </svg>
-                </div>
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-300 via-yellow-400 to-orange-400 p-0.5 shadow-md shadow-amber-500/20 flex items-center justify-center overflow-hidden animate-mascot-float">
+                <img 
+                  src="/mascot/heart.png" 
+                  alt="Sunflower Mascot" 
+                  className="w-full h-full object-cover rounded-xl bg-amber-50" 
+                />
               </div>
-              <span className="font-black text-2xl tracking-wider text-[#635BFF]">
-                ACME
-              </span>
+              <div className="text-left">
+                <span className="font-black text-xl tracking-wider text-amber-950 dark:text-white block leading-none">
+                  SUNNY DORM 🌻
+                </span>
+                <span className="text-[10px] text-amber-700 font-bold block mt-0.5">บ้านทานตะวันแสนอบอุ่น</span>
+              </div>
             </div>
 
             {/* Page Title */}
-            <h1 className="text-xl font-bold text-slate-900 tracking-tight">
-              {isSignUpMode ? 'Create your account' : 'Sign in to your account'}
+            <h1 className="text-lg font-bold text-slate-900 tracking-tight">
+              {isSignUpMode ? 'สร้างบัญชีผู้ใช้งานใหม่' : 'เข้าสู่ระบบหอพัก'}
             </h1>
 
           </div>
@@ -329,9 +331,9 @@ export const GoogleAuthModal: React.FC<GoogleAuthModalProps> = ({
             {/* Primary Action Button */}
             <button
               type="submit"
-              className="w-full py-3.5 px-4 bg-[#635BFF] hover:bg-[#5248f7] text-white font-semibold rounded-2xl shadow-md shadow-indigo-500/25 text-sm transition-all duration-150 active:scale-[0.99] flex items-center justify-center space-x-2"
+              className="w-full py-3.5 px-4 bg-gradient-to-r from-amber-500 via-amber-600 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-2xl shadow-md shadow-amber-500/25 text-sm transition-all duration-150 active:scale-[0.99] flex items-center justify-center space-x-2"
             >
-              <span>{isSignUpMode ? 'Create account' : 'Sign in'}</span>
+              <span>{isSignUpMode ? 'สร้างบัญชีผู้ใช้' : 'เข้าสู่ระบบ'}</span>
             </button>
 
           </form>
@@ -340,24 +342,24 @@ export const GoogleAuthModal: React.FC<GoogleAuthModalProps> = ({
           <div className="text-center text-xs text-slate-500 pt-1">
             {isSignUpMode ? (
               <span>
-                Already have an account?{' '}
+                มีบัญชีอยู่แล้วใช่ไหม?{' '}
                 <button
                   type="button"
                   onClick={() => setIsSignUpMode(false)}
-                  className="font-bold text-[#635BFF] hover:underline"
+                  className="font-bold text-amber-600 hover:underline"
                 >
-                  Sign in
+                  เข้าสู่ระบบ
                 </button>
               </span>
             ) : (
               <span>
-                Don't have an account?{' '}
+                ยังไม่มีบัญชีใช่ไหม?{' '}
                 <button
                   type="button"
                   onClick={() => setIsSignUpMode(true)}
-                  className="font-bold text-[#635BFF] hover:underline"
+                  className="font-bold text-amber-600 hover:underline"
                 >
-                  Sign up
+                  สมัครสมาชิก
                 </button>
               </span>
             )}

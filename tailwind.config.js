@@ -8,14 +8,30 @@ export default {
   theme: {
     extend: {
       colors: {
+        pastel: {
+          bg: '#FAF8F5',
+          cream: '#FEFCE8',
+          yellow: '#FEF08A',
+          amber: '#FDE68A',
+          mint: '#DCFCE7',
+          green: '#BBF7D0',
+          peach: '#FFEDD5',
+          coral: '#FED7AA',
+          pink: '#FCE7F3',
+          rose: '#FFE4E6',
+          lavender: '#EDE9FE',
+          sky: '#E0F2FE',
+          slate: '#F8FAFC'
+        },
         brand: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
+          50: '#fffbeb',
+          100: '#fef3c7',
+          200: '#fde68a',
+          300: '#fcd34d',
+          400: '#fbbf24',
+          500: '#f59e0b',
+          600: '#d97706',
+          700: '#b45309',
         },
         cf: {
           orange: '#f38020',
