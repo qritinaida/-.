@@ -34,6 +34,22 @@ declare global {
 
 const CLIENT_ID_KEY = 'dms_google_client_id_v1';
 
+// ─── Admin Email Whitelist ────────────────────────────────────────────────────
+// เพิ่ม email ที่ต้องการให้เป็น admin ที่นี่
+export const ADMIN_EMAILS: string[] = [
+  'xmzsuphanida@gmail.com',
+  'seree999@gmail.com',
+  // ตัวอย่างเดิม (สามารถลบออกได้)
+  'somkiat.admin@gmail.com',
+];
+
+/**
+ * ตรวจสอบว่า email นี้เป็น Admin หรือไม่
+ */
+export function isAdminEmail(email: string): boolean {
+  return ADMIN_EMAILS.includes(email.toLowerCase().trim());
+}
+
 // Default demo client ID (or custom entered by user)
 export function getStoredGoogleClientId(): string {
   return localStorage.getItem(CLIENT_ID_KEY) || '';
@@ -91,7 +107,7 @@ export function initGoogleAuth(
             name: payload.name || payload.email.split('@')[0],
             email: payload.email,
             picture: payload.picture || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(payload.name || payload.email)}`,
-            role: payload.email.includes('admin') || payload.email.includes('owner') ? 'admin' : 'tenant',
+            role: isAdminEmail(payload.email) ? 'admin' : 'tenant',
             roomId: 'r-101',
             roomNumber: '101'
           };

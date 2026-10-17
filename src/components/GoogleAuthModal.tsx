@@ -16,7 +16,8 @@ import { GoogleUser } from '../types';
 import { 
   initGoogleAuth, 
   getStoredGoogleClientId, 
-  saveStoredGoogleClientId 
+  saveStoredGoogleClientId,
+  isAdminEmail
 } from '../utils/googleAuth';
 
 interface GoogleAuthModalProps {
@@ -58,6 +59,20 @@ export const GoogleAuthModal: React.FC<GoogleAuthModalProps> = ({
   // Demo accounts for immediate access
   const demoAccounts: GoogleUser[] = [
     {
+      id: 'g-admin-suphanida',
+      name: 'Suphanida (Admin)',
+      email: 'xmzsuphanida@gmail.com',
+      picture: `https://api.dicebear.com/7.x/avataaars/svg?seed=xmzsuphanida`,
+      role: 'admin'
+    },
+    {
+      id: 'g-admin-seree',
+      name: 'Seree (Admin)',
+      email: 'seree999@gmail.com',
+      picture: `https://api.dicebear.com/7.x/avataaars/svg?seed=seree999`,
+      role: 'admin'
+    },
+    {
       id: 'g-admin-01',
       name: 'สมเกียรติ สิทธิชัย',
       email: 'somkiat.admin@gmail.com',
@@ -91,8 +106,10 @@ export const GoogleAuthModal: React.FC<GoogleAuthModalProps> = ({
       return;
     }
 
-    // Default fast Google login
-    const targetAccount = selectedRole === 'admin' ? demoAccounts[0] : demoAccounts[1];
+    // Default fast Google login — ใช้บัญชีตาม role ที่เลือก
+    const adminAccounts = demoAccounts.filter(a => a.role === 'admin');
+    const tenantAccounts = demoAccounts.filter(a => a.role === 'tenant');
+    const targetAccount = selectedRole === 'admin' ? adminAccounts[0] : tenantAccounts[0];
     onLogin(targetAccount);
     onClose();
   };
@@ -129,19 +146,23 @@ export const GoogleAuthModal: React.FC<GoogleAuthModalProps> = ({
     e.preventDefault();
     if (!email) return;
 
-    const emailPrefix = email.split('@')[0];
+    const normalizedEmail = email.includes('@') ? email.toLowerCase().trim() : `${email.toLowerCase().trim()}@gmail.com`;
+    const emailPrefix = normalizedEmail.split('@')[0];
     const formattedName = emailPrefix
       .replace(/[._-]/g, ' ')
       .replace(/\b\w/g, c => c.toUpperCase());
 
+    // ตรวจสอบ whitelist — ถ้า email ตรงกับ admin list ให้เป็น admin ทันที
+    const detectedRole: 'admin' | 'tenant' = isAdminEmail(normalizedEmail) ? 'admin' : selectedRole;
+
     const newUser: GoogleUser = {
       id: `usr-${Date.now()}`,
       name: formattedName || 'ผู้ใช้งาน',
-      email: email.includes('@') ? email : `${email}@gmail.com`,
-      picture: `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(email)}`,
-      role: selectedRole,
-      roomId: selectedRole === 'tenant' ? 'r-101' : undefined,
-      roomNumber: selectedRole === 'tenant' ? '101' : undefined
+      email: normalizedEmail,
+      picture: `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(normalizedEmail)}`,
+      role: detectedRole,
+      roomId: detectedRole === 'tenant' ? 'r-101' : undefined,
+      roomNumber: detectedRole === 'tenant' ? '101' : undefined
     };
 
     onLogin(newUser);
